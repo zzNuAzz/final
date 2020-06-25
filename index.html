@@ -204,9 +204,9 @@ int main() {
     f[0] = 1;
     int lmax = 1;
     for(int i = 1; i &lt; n; i++) {
-        int max = 1;
+        int max = 0;
         for(int j = 0; j &lt; i; j++) {
-            if(b[j] &gt; b[i] &amp;&amp; f[j] &gt; max) max = f[j];
+            if(b[j] &gt; b[i] &amp;&amp; a[j] &gt; a[i]&amp;&amp; f[j] &gt; max) max = f[j];
         }
         f[i] = max + 1;
         if (f[i] &gt; lmax) lmax = f[i];
