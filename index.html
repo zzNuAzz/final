@@ -179,6 +179,42 @@ int main() {
     <pre>
           <code>
 // BTWR
+#include &lt;iostream&gt;
+using namespace std;
+const int nmax = 21;
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    int a[nmax];
+    int b[nmax];
+    for(int i = 0; i &lt; n; i++) {
+        cin &gt;&gt; a[i] &gt;&gt; b[i];
+    }
+
+    for(int i = 0; i &lt; n - 1; i++) {
+        for(int j = i+1; j &lt; n; j++) {
+            if(a[i] &lt; a[j]) {
+                int ta = a[i]; int tb = b[i];
+                a[i] = a[j]; b[i] = b[j];
+                a[j] = ta; b[j] = tb;
+            }
+        }
+    }
+    int f[nmax];
+    f[0] = 1;
+    int lmax = 1;
+    for(int i = 1; i &lt; n; i++) {
+        int max = 1;
+        for(int j = 0; j &lt; i; j++) {
+            if(b[j] &gt; b[i] &amp;&amp; f[j] &gt; max) max = f[j];
+        }
+        f[i] = max + 1;
+        if (f[i] &gt; lmax) lmax = f[i];
+    }
+    cout &lt;&lt; lmax;
+    
+    return 0;
+}
           </code>
       </pre>
 
