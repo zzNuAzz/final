@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        pre code {
+            background-color: #eee;
+            border: 1px solid #999;
+            display: block;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <pre>
+        <code>
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main()
+{
+    int L, R, digit;
+    cin &gt;&gt; L &gt;&gt; R &gt;&gt; digit;
+
+    vector&lt;bool&gt; isPrime(R - L + 1, true);
+
+    for (int i = 2; i * i &lt;= R; ++i) {
+        for (int j = max(i * i, (L + i - 1) / i * i); j &lt;= R; j += i) {
+            isPrime[j - L] = false;
+        }
+    }
+    if (1 &gt;= L) {
+        isPrime[1 - L] = false;
+    }
+
+    int ans = 0;
+    for (int x = L; x &lt;= R; ++x) {
+        if (isPrime[x - L]) {
+            int t = x;
+            while(t &gt; 0) {
+                if(t % 10 == digit) {
+                    ans++;
+                    break;
+                }
+                t /= 10;
+            }
+        }
+    }
+    cout &lt;&lt; ans;
+    return 0;
+}
+        </code>
+      </pre>
+
+      <pre>
+          <code>
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 11;
+const int maxf = 1001;
+const int inf = 999999;
+
+int main() {
+    
+    int c, n;
+    cin &gt;&gt; c &gt;&gt; n;
+    int a[maxn];
+    int f[maxn][maxf];
+    for(int i = 1; i &lt;= n; i++) {
+        cin &gt;&gt; a[i];
+    }
+    
+    for(int i = 0; i &lt;= n; i++) {
+        for(int j = 0; j &lt;= c; j++) {
+            if(j == 0) f[i][j] = 0;
+            else if(i == 0) f[i][j] = inf;
+            else if(j &lt; a[i]) f[i][j] = f[i-1][j];
+            else f[i][j] = min(f[i-1][j], f[i][j - a[i]] + 1);
+        }
+    }
+
+    cout &lt;&lt; f[n][c];
+    
+    return 0;
+}
+          </code>
+      </pre>
+</body>
+
+</html>
